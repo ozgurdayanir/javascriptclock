@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css"
+    integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous" />
+  <title>Kodluyoruz Javascript Saat Ödevi</title>
+</head>
+
+<body class="bg-dark">
+  <div class="text-center">
+    <img src="https://cdn.sanity.io/images/9kdepi1d/production/65c832d202a503b15d99e628f4313782f3ef50db-300x62.png"
+      alt="" class="rounded" />
+    <div class="text1 text-center">
+      Merhaba, <strong><span id="myName"></span></strong>! Hoş geldin!
+    </div>
+    <div id="myClock" class="clock" onload="showTime()"></div>
+    <div class="text2 text-center">
+      tarihinde
+      <strong>Kodluyoruz Frontend Web Development Patikası</strong>'nın
+      Javascript bölümü 1. Ödevindesiniz.
+    </div>
+  </div>
+
+  <!-- src="js/clock.js" -->
+  <script>
+
+    let userName = "";
+    const namePattern = /^[a-zA-Z-ZüÜçÇöÖıİşŞğĞ ]+$/; //  Sadece harfler ve boşluk kabul eden regex
+
+    // Kullanıcı bir isim girene kadar prompt ile sor
+    while (!userName || !namePattern.test(userName)) {
+      userName = prompt("Please write your name.", "Name Here");
+      if (!namePattern.test(userName)) {
+        alert("You cannot use special characters!");
+      }
+    }
+
+    // Alınan ismi myName id'li span içine yerleştir
+    document.getElementById("myName").textContent = userName;
+
+    //zamanı göstermek için bir fonkisyon ekliyorum
+    function showTime() {
+      const date = new Date(); // Güncel tarih ve saati al alıyorum
+      
+      const options = {
+         weekday: 'long'
+        }; //sadece haftanın gününü göstermesini sağlıyorum
+      
+      const currentDate = date.toLocaleDateString('tr-TR', options); // Türkçe tarih formatı
+      
+      const time = date.toLocaleTimeString('tr-TR'); // Türkçe saat formatı
+
+      // Burda  kesme işareti "`" kullanarak ve $ kullanarak seçtiğim "myClock" id'li elemente tanımlamış olduğum Tarih ve saat bilgisini myClock id'li div'in içine yerleştiriyorum.
+      document.getElementById("myClock").textContent = `${currentDate} ~ ${time}`;
+    }
+
+    // showTime fonksiyonunu her saniye çağır
+    setInterval(showTime, 1000);
+
+  </script>
+</body>
+
+</html>
